@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "active_data"
 gem "bootsnap", require: false
 gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
