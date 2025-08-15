@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:16
+    container_name: autoresponder_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: app_development
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5443:5432"
+
+  app:
+    build: .
+    container_name: autoresponder_app
+    command: ["rails", "server", "-b", "0.0.0.0"]
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:
