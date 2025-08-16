@@ -4,11 +4,11 @@
 # to make HTTP requests to the external services
 module ApiClients
   class ApiClient
-    CONTENT_TYPE_JSON = "application/json"
+    CONTENT_TYPE = "application/json"
 
     attr_reader :api_path, :api_key, :content_type
 
-    def initialize(api_path: nil, api_key: nil, content_type: CONTENT_TYPE_JSON)
+    def initialize(api_path: nil, api_key: nil, content_type: CONTENT_TYPE)
       @api_path = api_path || self.class::API_PATH
       @api_key = api_key || ENV.fetch("#{self.class::CLIENT}_API_KEY", nil)
       @content_type = content_type
@@ -42,7 +42,7 @@ module ApiClients
     end
 
     def response(response)
-      { code: response.code, body: JSON.parse(response.body) }
+      { code: response.code, body: JSON.parse(response.body).with_indifferent_access }
     end
 
     def headers

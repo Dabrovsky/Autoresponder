@@ -35,8 +35,8 @@ module Openai
       cancelled: CANCELED
     }, default: VALIDATING
 
-    with_options presence: true do
-      validates :external_batch_id, :external_status
-    end
+    validates :external_batch_id, :external_status, presence: true
+
+    scope :processing, -> { validating.or(in_progress).or(finalizing) }
   end
 end

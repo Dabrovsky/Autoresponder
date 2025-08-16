@@ -15,17 +15,13 @@ class Ticket < ApplicationRecord
   STATUSES = [
     PENDING = "pending",
     PROCESSING = "processing",
-    READY = "ready",
-    ACCEPTED = "accepted",
-    REJECTED = "rejected"
+    CLOSED = "closed"
   ].freeze
 
   enum :status, {
     pending: PENDING,
     processing: PROCESSING,
-    ready: READY,
-    accepted: ACCEPTED,
-    rejected: REJECTED
+    closed: CLOSED
   }, default: PENDING
 
   with_options presence: true do
@@ -36,4 +32,6 @@ class Ticket < ApplicationRecord
   normalizes :customer_email, with: -> { it.squish.downcase }
 
   has_many :answers, class_name: "Openai::Answer", dependent: :destroy
+
+  scope :with_rejected_answers, -> { where(openai_answers: { status: Openai::Answer::REJECTED }) }
 end
