@@ -12,6 +12,7 @@ gem "solid_cable"
 gem "solid_cache"
 gem "solid_queue"
 gem "thruster", require: false
+gem "typhoeus"
 gem "tzinfo-data", platforms: %i(windows jruby)
 
 group :development do
@@ -20,7 +21,12 @@ end
 
 group :development, :test do
   gem "debug", platforms: %i(mri windows), require: "debug/prelude"
+  gem "dotenv"
   gem "factory_bot_rails"
   gem "rspec-rails", "~> 8.0.0"
   gem "rubocop-rails-omakase", require: false
+end
+
+group :test do
+  gem "webmock"
 end
