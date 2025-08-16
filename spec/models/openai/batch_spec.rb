@@ -2,11 +2,11 @@
 
 require "rails_helper"
 
-RSpec.describe Batch, type: :model do
+RSpec.describe Openai::Batch, type: :model do
   attr_reader :batch
 
   before do
-    @batch = build(:batch)
+    @batch = build(:openai_batch)
   end
 
   describe "validations" do
