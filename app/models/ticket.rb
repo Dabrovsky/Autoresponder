@@ -30,7 +30,7 @@ class Ticket < ApplicationRecord
 
   with_options presence: true do
     validates :status, :message
-    validates :customer_email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+    validates :customer_email, format: { with: URI::MailTo::EMAIL_REGEXP }
   end
 
   normalizes :customer_email, with: -> { it.squish.downcase }
