@@ -34,4 +34,6 @@ class Ticket < ApplicationRecord
   end
 
   normalizes :customer_email, with: -> { it.squish.downcase }
+
+  has_many :answers, class_name: "Openai::Answer", dependent: :destroy
 end
