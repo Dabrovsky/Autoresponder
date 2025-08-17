@@ -7,7 +7,6 @@
 #  id                :uuid             not null, primary key
 #  external_batch_id :string           not null
 #  external_status   :string           not null
-#  ticket_ids        :jsonb
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

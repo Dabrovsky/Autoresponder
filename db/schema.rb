@@ -10,14 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_16_145810) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_17_131704) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "openai_answers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "ticket_id", null: false
+    t.string "status", null: false
+    t.text "message", null: false
+    t.text "rejected_reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_openai_answers_on_ticket_id"
+  end
+
+  create_table "openai_batch_tickets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "openai_batch_id", null: false
+    t.uuid "ticket_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["openai_batch_id"], name: "index_openai_batch_tickets_on_openai_batch_id"
+    t.index ["ticket_id"], name: "index_openai_batch_tickets_on_ticket_id"
+  end
 
   create_table "openai_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "external_batch_id", null: false
     t.string "external_status", null: false
-    t.jsonb "ticket_ids", default: []
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,4 +54,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_16_145810) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "openai_answers", "tickets"
+  add_foreign_key "openai_batch_tickets", "openai_batches"
+  add_foreign_key "openai_batch_tickets", "tickets"
 end
