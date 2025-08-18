@@ -4,7 +4,7 @@ module Api
   module V1
     class TicketsController < ApplicationController
       def index
-        command = Tickets::List.call
+        command = ::Tickets::List.call
 
         render json: TicketSerializer.new(
           command.value,
@@ -13,7 +13,7 @@ module Api
       end
 
       def create
-        command = Tickets::Create.call(**ticket_params)
+        command = ::Tickets::Create.call(**ticket_params)
 
         render json: TicketSerializer.new(
           command.value
@@ -21,7 +21,7 @@ module Api
       end
 
       def update
-        command = Tickets::Update.call(**ticket_params, id: ticket_id)
+        command = ::Tickets::Update.call(**ticket_params, id: ticket_id)
 
         render json: TicketSerializer.new(
           command.value
@@ -29,7 +29,7 @@ module Api
       end
 
       def destroy
-        Tickets::Destroy.call(id: ticket_id)
+        ::Tickets::Destroy.call(id: ticket_id)
 
         render status: :no_content
       end

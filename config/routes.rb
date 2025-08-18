@@ -10,7 +10,14 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :tickets, only: %i(index create update destroy)
+      resources :tickets, only: %i(index create update destroy) do
+        resources :answers, only: %i(index), controller: "tickets/answers" do
+          member do
+            patch :accept
+            patch :reject
+          end
+        end
+      end
     end
   end
 end

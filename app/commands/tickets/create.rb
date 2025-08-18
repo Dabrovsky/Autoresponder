@@ -23,7 +23,7 @@ module Tickets
     end
 
     def save!
-      entity.save
+      entity.save!
     end
 
     def entity_params

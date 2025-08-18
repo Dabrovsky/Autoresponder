@@ -12,7 +12,7 @@ RSpec.describe Tickets::List do
   describe ".call" do
     it "returns an array as a response value" do
       tickets = create_pair(:ticket)
-      output = Tickets::List.new.call
+      output = Tickets::List.call
 
       expect(output.value.count).to eq(2)
       expect(output.value).to eq(tickets)

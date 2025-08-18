@@ -18,7 +18,7 @@ RSpec.describe Tickets::Create do
         }
 
         expect do
-          Tickets::Create.new(**input).call
+          Tickets::Create.call(**input)
         end.to change(Ticket, :count).by(1)
       end
     end
@@ -29,7 +29,7 @@ RSpec.describe Tickets::Create do
         expected_message = "Validation failed: Customer email can't be blank, Message can't be blank"
 
         expect do
-          Tickets::Create.new(**input).call
+          Tickets::Create.call(**input)
         end.to raise_error(ActiveData::ValidationError, expected_message)
       end
     end
