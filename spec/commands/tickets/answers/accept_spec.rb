@@ -2,34 +2,31 @@
 
 require "rails_helper"
 
-RSpec.describe Tickets::Destroy do
-  describe "Destroy class inheritance" do
+RSpec.describe Tickets::Answers::Accept do
+  describe "Update class inheritance" do
     it "inherits from Command class" do
-      expect(Tickets::Destroy.superclass).to eq(Command)
+      expect(Tickets::Answers::Accept.superclass).to eq(Command)
     end
   end
 
   describe ".call" do
     context "valid paramateres provided" do
-      it "destroys a ticket from the database" do
-        ticket = create(:ticket)
-        input = {
-          id: ticket.id
-        }
+      it "updates a answer entity" do
+        answer = create(:openai_answer)
 
-        expect do
-          Tickets::Destroy.call(**input)
-        end.to change(Ticket, :count).by(-1)
+        output = Tickets::Answers::Accept.call(id: answer.id)
+
+        expect(output.value).to be_an_instance_of(Openai::Answer)
+        expect(output.value.status).to eq(Openai::Answer::ACCEPTED)
       end
     end
 
     context "invalid paramateres provided" do
       it "raises ActiveData::ValidationError" do
-        input = {}
         expected_message = "Validation failed: Id can't be blank"
 
         expect do
-          Tickets::Destroy.call(**input)
+          Tickets::Answers::Accept.call
         end.to raise_error(ActiveData::ValidationError, expected_message)
       end
     end

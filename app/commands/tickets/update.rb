@@ -24,7 +24,7 @@ module Tickets
     end
 
     def update!
-      entity.update(entity_params)
+      entity.update!(entity_params)
     end
 
     def entity_params

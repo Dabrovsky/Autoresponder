@@ -19,7 +19,7 @@ RSpec.describe Tickets::Update do
           message: "Updated message"
         }
 
-        output = Tickets::Update.new(**input).call
+        output = Tickets::Update.call(**input)
 
         expect(output.value).to be_an_instance_of(Ticket)
         expect(output.value.message).to eq("Updated message")
@@ -32,7 +32,7 @@ RSpec.describe Tickets::Update do
         expected_message = "Validation failed: Id can't be blank, Customer email can't be blank, Message can't be blank"
 
         expect do
-          Tickets::Update.new(**input).call
+          Tickets::Update.call(**input)
         end.to raise_error(ActiveData::ValidationError, expected_message)
       end
     end
