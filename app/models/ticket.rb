@@ -34,7 +34,7 @@ class Ticket < ApplicationRecord
   has_one :last_answer, -> { order(created_at: :desc) }, class_name: "Openai::Answer", dependent: :destroy
   has_many :answers, class_name: "Openai::Answer", dependent: :destroy
 
-  scope :with_rejected_answer, -> {
+  scope :with_rejected_answer, lambda {
     joins(<<~SQL)
       JOIN (
         SELECT a.id, a.ticket_id, a.status
