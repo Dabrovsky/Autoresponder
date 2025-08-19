@@ -25,7 +25,7 @@ module Openai
     private
 
     def tickets
-      @tickets ||= Ticket.left_joins(:answers).pending.or(Ticket.processing.with_rejected_answers).distinct
+      @tickets ||= [Ticket.pending, Ticket.processing.with_rejected_answer].flatten
     end
 
     def client

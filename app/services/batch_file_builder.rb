@@ -40,6 +40,6 @@ class BatchFileBuilder
     message = ticket.message
     return message if ticket.pending?
 
-    "#{message}\n\nTake into account additional instruction: #{ticket.answers.last.rejected_reason}"
+    "#{message}\n\nTake into account additional instruction: #{ticket.last_answer.rejected_reason}"
   end
 end
