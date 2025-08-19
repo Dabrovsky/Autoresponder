@@ -8,7 +8,9 @@ RUN apk update && apk add --no-cache \
   postgresql-dev \
   yaml-dev \
   tzdata \
-  git
+  git \
+  cronie \
+  bash
 
 # Set the working directory inside the container
 WORKDIR /app
