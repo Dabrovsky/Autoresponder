@@ -14,6 +14,7 @@ gem "solid_queue"
 gem "thruster", require: false
 gem "typhoeus"
 gem "tzinfo-data", platforms: %i(windows jruby)
+gem "whenever", require: false
 
 group :development do
   gem "annotaterb"

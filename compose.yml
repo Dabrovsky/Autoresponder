@@ -22,5 +22,15 @@ services:
     depends_on:
       - db
 
+  cron:
+    build: .
+    container_name: autoresponder_cron
+    command: >
+      sh -c "bundle exec whenever --update-crontab && crond -f"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
 volumes:
   postgres-data:

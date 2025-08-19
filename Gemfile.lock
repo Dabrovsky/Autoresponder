@@ -88,6 +88,7 @@ GEM
     bootsnap (1.18.6)
       msgpack (~> 1.2)
     builder (3.3.0)
+    chronic (0.10.2)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.3)
     crack (1.0.0)
@@ -334,6 +335,8 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     zeitwerk (2.7.3)
 
 PLATFORMS
@@ -368,6 +371,7 @@ DEPENDENCIES
   typhoeus
   tzinfo-data
   webmock
+  whenever
 
 BUNDLED WITH
    2.6.2
