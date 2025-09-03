@@ -5,7 +5,7 @@ source "https://rubygems.org"
 gem "active_data"
 gem "bootsnap", require: false
 gem "jsonapi-serializer"
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.6"
 gem "puma", ">= 5.0"
 gem "rails", "~> 8.0.2"
 gem "solid_cable"
